@@ -1,0 +1,17 @@
+backend:
+  name: git-gateway
+  branch: main # Si tu rama principal en GitHub se llama "master", cámbialo aquí.
+
+media_folder: "images" # Aquí se guardarán las fotos que subas
+public_folder: "/images"
+
+collections:
+  - name: "menu"
+    label: "Platos del Menú"
+    folder: "menu_items" # El sistema creará esta carpeta sola para guardar la información
+    create: true
+    fields:
+      - {label: "Nombre del Plato", name: "title", widget: "string"}
+      - {label: "Precio", name: "price", widget: "number"}
+      - {label: "Descripción", name: "description", widget: "text"}
+      - {label: "Foto", name: "image", widget: "image"}

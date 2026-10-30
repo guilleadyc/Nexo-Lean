@@ -1,0 +1,403 @@
+{
+  "branding": {
+    "name": "Nexo Store",
+    "tagline": "Tecnología, Diseño & Estilo de Vida",
+    "logo": "",
+    "favicon": "",
+    "banner": "",
+    "whatsapp": "+1234567890",
+    "fontPrimary": "'Plus Jakarta Sans', sans-serif",
+    "theme": "dark",
+    "colors": {
+      "tagsCategories": "#2563eb",
+      "primary": "#2563eb",
+      "badgeBg": "#ef4444",
+      "badgeText": "#ffffff"
+    }
+  },
+  "categories": [
+    {
+      "id": "cat_audio",
+      "name": "Audio & Sonido Pro",
+      "icon": "🎧"
+    },
+    {
+      "id": "cat_wearables",
+      "name": "Smartwatches & Wearables",
+      "icon": "⌚"
+    },
+    {
+      "id": "cat_home",
+      "name": "Hogar Inteligente & Diseño",
+      "icon": "🛋️"
+    },
+    {
+      "id": "cat_gear",
+      "name": "Accesorios & Movilidad",
+      "icon": "🎒"
+    }
+  ],
+  "products": [
+    {
+      "id": "prod_1",
+      "sku": "NX-AUD-01",
+      "name": "Auriculares Inalámbricos Studio Pro ANC",
+      "categoryId": "cat_audio",
+      "basePrice": 249.99,
+      "salePrice": 199.99,
+      "badge": "Más Vendido",
+      "description": "Auriculares over-ear con cancelación activa de ruido híbrida de 42dB, transductores de grafeno de 40mm, audio espacial de 360 grados y hasta 55 horas de reproducción ininterrumpida.",
+      "coverImage": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=1200&auto=format&fit=crop&q=80",
+      "thumb": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&auto=format&fit=crop&q=80",
+      "gallery": [
+        {
+          "type": "image",
+          "url": "https://images.unsplash.com/photo-1484704849700-f032a568e944?w=1200&auto=format&fit=crop&q=80",
+          "thumb": "https://images.unsplash.com/photo-1484704849700-f032a568e944?w=400"
+        },
+        {
+          "type": "image",
+          "url": "https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=1200&auto=format&fit=crop&q=80",
+          "thumb": "https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=400"
+        }
+      ],
+      "media": [
+        {
+          "type": "image",
+          "url": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=1200&auto=format&fit=crop&q=80"
+        },
+        {
+          "type": "image",
+          "url": "https://images.unsplash.com/photo-1484704849700-f032a568e944?w=1200&auto=format&fit=crop&q=80"
+        },
+        {
+          "type": "image",
+          "url": "https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=1200&auto=format&fit=crop&q=80"
+        }
+      ],
+      "specs": [
+        {
+          "key": "Marca",
+          "value": "AcousticLab"
+        },
+        {
+          "key": "Conectividad",
+          "value": "Bluetooth 5.3 + Cable Jack 3.5mm"
+        },
+        {
+          "key": "Cancelación de Ruido",
+          "value": "Híbrida Activa 42dB"
+        },
+        {
+          "key": "Batería",
+          "value": "55 Horas (Carga rápida USB-C)"
+        },
+        {
+          "key": "Peso",
+          "value": "245 g"
+        },
+        {
+          "key": "Garantía",
+          "value": "2 Años Oficial"
+        },
+        {
+          "key": "Disponibilidad",
+          "value": "En Stock Inmediato"
+        }
+      ],
+      "tags": [
+        "audio",
+        "auriculares",
+        "bluetooth",
+        "anc",
+        "hi-res"
+      ],
+      "likes": 84
+    },
+    {
+      "id": "prod_2",
+      "sku": "NX-WAT-02",
+      "name": "Smartwatch Titanium Horizon Ultra",
+      "categoryId": "cat_wearables",
+      "basePrice": 320,
+      "salePrice": 269,
+      "badge": "Oferta",
+      "description": "Reloj inteligente con caja de titanio aeroespacial, cristal de zafiro irrayable, pantalla Always-On AMOLED de 1.43 pulgadas, GPS de doble frecuencia y sensor biométrico de ECG y oxígeno.",
+      "coverImage": "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=1200&auto=format&fit=crop&q=80",
+      "thumb": "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&auto=format&fit=crop&q=80",
+      "gallery": [
+        {
+          "type": "image",
+          "url": "https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=1200&auto=format&fit=crop&q=80",
+          "thumb": "https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=400"
+        }
+      ],
+      "media": [
+        {
+          "type": "image",
+          "url": "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=1200&auto=format&fit=crop&q=80"
+        },
+        {
+          "type": "image",
+          "url": "https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=1200&auto=format&fit=crop&q=80"
+        }
+      ],
+      "specs": [
+        {
+          "key": "Material de Caja",
+          "value": "Titanio Grado 5"
+        },
+        {
+          "key": "Cristal",
+          "value": "Zafiro Sintético"
+        },
+        {
+          "key": "Resistencia al Agua",
+          "value": "10 ATM (100 Metros)"
+        },
+        {
+          "key": "Autonomía",
+          "value": "Hasta 14 Días"
+        },
+        {
+          "key": "Compatibilidad",
+          "value": "iOS y Android"
+        },
+        {
+          "key": "Sensores",
+          "value": "ECG, SpO2, Temperatura, Altímetro"
+        }
+      ],
+      "tags": [
+        "reloj",
+        "smartwatch",
+        "titanio",
+        "fitness",
+        "gps"
+      ],
+      "likes": 126
+    },
+    {
+      "id": "prod_3",
+      "sku": "NX-HOM-03",
+      "name": "Lámpara de Mesa Escandinava Lumio Glow",
+      "categoryId": "cat_home",
+      "basePrice": 119,
+      "salePrice": null,
+      "badge": "Diseño Exclusivo",
+      "description": "Lámpara arquitectónica minimalista con base de roble macizo sostenible, difusor de vidrio opalino soplado artesanalmente y control táctil de intensidad lumínica regulable.",
+      "coverImage": "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=1200&auto=format&fit=crop&q=80",
+      "thumb": "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=400&auto=format&fit=crop&q=80",
+      "gallery": [
+        {
+          "type": "image",
+          "url": "https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?w=1200&auto=format&fit=crop&q=80",
+          "thumb": "https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?w=400"
+        }
+      ],
+      "media": [
+        {
+          "type": "image",
+          "url": "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=1200&auto=format&fit=crop&q=80"
+        },
+        {
+          "type": "image",
+          "url": "https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?w=1200&auto=format&fit=crop&q=80"
+        }
+      ],
+      "specs": [
+        {
+          "key": "Materiales",
+          "value": "Roble Natural & Vidrio Opalino"
+        },
+        {
+          "key": "Temperatura de Luz",
+          "value": "2200K - 3000K (Cálida Regulable)"
+        },
+        {
+          "key": "Potencia",
+          "value": "LED 8W integrado (50.000 horas)"
+        },
+        {
+          "key": "Dimensiones",
+          "value": "28 cm x 18 cm"
+        },
+        {
+          "key": "Voltaje",
+          "value": "110V - 240V Universal"
+        }
+      ],
+      "tags": [
+        "iluminacion",
+        "lampara",
+        "nordico",
+        "madera",
+        "hogar"
+      ],
+      "likes": 47
+    },
+    {
+      "id": "prod_4",
+      "sku": "NX-BAG-04",
+      "name": "Mochila Urbana Impermeable Veloce Pack 26L",
+      "categoryId": "cat_gear",
+      "basePrice": 139.5,
+      "salePrice": 109.9,
+      "badge": "Nuevo",
+      "description": "Mochila técnica para trabajo y viajes confeccionada en tejido Cordura 1000D resistente al agua. Compartimento acolchado para portátiles de hasta 16 pulgadas y apertura clamshell de 180°.",
+      "coverImage": "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=1200&auto=format&fit=crop&q=80",
+      "thumb": "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=400&auto=format&fit=crop&q=80",
+      "gallery": [
+        {
+          "type": "image",
+          "url": "https://images.unsplash.com/photo-1622560480605-d83c853bc5c3?w=1200&auto=format&fit=crop&q=80",
+          "thumb": "https://images.unsplash.com/photo-1622560480605-d83c853bc5c3?w=400"
+        }
+      ],
+      "media": [
+        {
+          "type": "image",
+          "url": "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=1200&auto=format&fit=crop&q=80"
+        },
+        {
+          "type": "image",
+          "url": "https://images.unsplash.com/photo-1622560480605-d83c853bc5c3?w=1200&auto=format&fit=crop&q=80"
+        }
+      ],
+      "specs": [
+        {
+          "key": "Capacidad",
+          "value": "26 Litros"
+        },
+        {
+          "key": "Material",
+          "value": "Cordura 1000D Hidrófugo"
+        },
+        {
+          "key": "Compartimento Laptop",
+          "value": "Hasta 16 Pulgadas"
+        },
+        {
+          "key": "Cremalleras",
+          "value": "YKK Aquaguard Impermeables"
+        },
+        {
+          "key": "Peso",
+          "value": "850 g"
+        }
+      ],
+      "tags": [
+        "mochila",
+        "viaje",
+        "laptop",
+        "impermeable",
+        "cordura"
+      ],
+      "likes": 95
+    },
+    {
+      "id": "prod_5",
+      "sku": "NX-KEY-05",
+      "name": "Teclado Mecánico Custom Apex 75%",
+      "categoryId": "cat_audio",
+      "basePrice": 185,
+      "salePrice": 155,
+      "badge": "Garantía Oficial",
+      "description": "Teclado mecánico premium con estructura Gasket Mount amortiguada por silicona multicapa, switches lineales pre-lubricados, perilla de volumen de aluminio y triple conectividad (2.4Ghz, Bluetooth, USB-C).",
+      "coverImage": "https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=1200&auto=format&fit=crop&q=80",
+      "thumb": "https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=400&auto=format&fit=crop&q=80",
+      "gallery": [
+        {
+          "type": "image",
+          "url": "https://images.unsplash.com/photo-1618384887929-16ec33fab9ef?w=1200&auto=format&fit=crop&q=80",
+          "thumb": "https://images.unsplash.com/photo-1618384887929-16ec33fab9ef?w=400"
+        }
+      ],
+      "media": [
+        {
+          "type": "image",
+          "url": "https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=1200&auto=format&fit=crop&q=80"
+        },
+        {
+          "type": "image",
+          "url": "https://images.unsplash.com/photo-1618384887929-16ec33fab9ef?w=1200&auto=format&fit=crop&q=80"
+        }
+      ],
+      "specs": [
+        {
+          "key": "Formato",
+          "value": "75% Compacto (82 Teclas + Knob)"
+        },
+        {
+          "key": "Montaje",
+          "value": "Gasket Mount con 5 capas de Poron"
+        },
+        {
+          "key": "Switches",
+          "value": "Lineales Lubrificados (Hotswap)"
+        },
+        {
+          "key": "Keycaps",
+          "value": "PBT Dye-Sub de perfil Cherry"
+        },
+        {
+          "key": "Batería",
+          "value": "4000 mAh"
+        }
+      ],
+      "tags": [
+        "teclado",
+        "mecanico",
+        "custom",
+        "gaming",
+        "setup"
+      ],
+      "likes": 110
+    },
+    {
+      "id": "prod_6",
+      "sku": "NX-CAM-06",
+      "name": "Cámara Instantánea Compacta Retro Snap 4K",
+      "categoryId": "cat_wearables",
+      "basePrice": 99,
+      "salePrice": null,
+      "badge": "Popular",
+      "description": "Combina la magia de la fotografía instantánea analógica con un sensor digital de alta definición. Permite previsualizar en pantalla antes de imprimir o guardar en tarjeta microSD.",
+      "coverImage": "https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=1200&auto=format&fit=crop&q=80",
+      "thumb": "https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=400&auto=format&fit=crop&q=80",
+      "gallery": [],
+      "media": [
+        {
+          "type": "image",
+          "url": "https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=1200&auto=format&fit=crop&q=80"
+        }
+      ],
+      "specs": [
+        {
+          "key": "Tecnología de Impresión",
+          "value": "ZINK Zero Ink (Sin tinta)"
+        },
+        {
+          "key": "Resolución",
+          "value": "16 Megapíxeles / Video 4K"
+        },
+        {
+          "key": "Pantalla",
+          "value": "LCD 2.5 pulgadas a color"
+        },
+        {
+          "key": "Almacenamiento",
+          "value": "MicroSD hasta 128GB"
+        }
+      ],
+      "tags": [
+        "camara",
+        "instantanea",
+        "retro",
+        "fotografia"
+      ],
+      "likes": 72
+    }
+  ],
+  "updatedAt": "2026-10-26T18:18:10.710Z"
+}

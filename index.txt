@@ -1,0 +1,134 @@
+N
+Nexo Store
+Tecnología, Diseño & Estilo de Vida
+✕
+🌙 ☀️ 🌓
+Admin
+
+Todos 🏷️ Ofertas 🔥 Más Vendidos ✨ Novedades
+Cargando catálogo...
+Ordenar:
+            Recomendados
+            Menor Precio
+            Mayor Precio
+            Nombre (A - Z)
+          
+Cuadrícula Reels
+
+
+✕
+
+
+Visor Multimedia 1 de 1
+🔍 Zoom ✕
+
+‹ ›
+Desliza lateralmente para navegar o doble toque para zoom
+
+🔐
+Acceso al Panel de Administración
+Ingresa tus credenciales de propietario para gestionar productos y marca blanca.
+Usuario Administrador:
+Contraseña:
+Cancelar Iniciar Sesión 🛡️
+Credencial inicial predeterminada: admin / admin123
+
+⚙️
+Panel de Administración B2B
+Gestión Integral de Catálogo, Marca Blanca & Excel
+Cerrar Sesión ✕
+📦 Productos (CRUD) 🏷️ Categorías 📊 Importación Masiva (Excel) 🎨 Marca & Estilos 🔐 Seguridad & Respaldo
++ Añadir Nuevo Producto
+Foto
+Producto & SKU
+Precio
+Badge
+Especificaciones
+Acciones
+
+Crear Nueva Categoría
+Nombre de la Categoría:
+Icono / Emoji:
++ Agregar Categoría
+Categorías Activas en Navegación
+Puedes reordenar, renombrar o eliminar categorías. Los productos se adaptan automáticamente.
+
+📑
+Importador Masivo de Catálogo
+Sube tu catálogo de productos directamente desde archivos Excel (.xlsx, .xls) o CSV (.csv). Nuestro motor mapeará automáticamente títulos, SKU, categorías, precios de oferta, badges, imágenes y especificaciones técnicas.
+📥 Descargar Plantilla Modelo (CSV) 📂 Seleccionar Archivo Excel o CSV
+Columnas Soportadas para Mapeo Inteligente:
+Titulo / Nombre SKU / Código Categoría Precio Base Precio Oferta Badge / Destacado Descripción Imágenes / Videos (URLs separadas por comas) Especificaciones (Clave:Valor; Clave:Valor)
+Identidad Comercial
+Nombre Comercial / Tienda:
+Eslogan o Subtítulo:
+WhatsApp de Contacto / Ventas:
+Logo de la Marca (Subida Directa):
+Carga un archivo PNG/SVG o JPG (almacenado localmente en Base64).
+Favicon de Pestaña:
+
+Tipografía y Paleta de Colores
+Fuente Tipográfica Principal:
+                    Plus Jakarta Sans (Moderna y Elegante)
+                    Inter (Limpia y Funcional)
+                    Poppins (Geométrica)
+                    Outfit (Vanguardista)
+                    Montserrat (Contemporánea)
+                    Playfair Display (Editorial / Lujo)
+                    Roboto (Clásica y Neutra)
+                  
+Color de Tipografía para Etiquetas (Tags) y Categorías Seleccionadas:
+Color de tipografía exclusivo
+Estilo estricto: Este color se aplica únicamente al texto de las etiquetas (tags) y categorías seleccionadas. Los botones, fondos de tarjeta y textos generales permanecen neutros e intactos.
+Guardar Identidad y Estilos ✨
+Credenciales de Administrador
+Usuario de Acceso:
+Nueva Contraseña (dejar vacío si no deseas cambiarla):
+Confirmar Nueva Contraseña:
+Guardar Nuevas Credenciales 🔐
+Copias de Seguridad & Catálogo Demo
+💾 Exportar Catálogo Completo (JSON)
+📥 Importar Copia de Seguridad JSON
+
+🔄 Restaurar Catálogo Demo (Productos de Ejemplo)
+
+Editar Producto
+✕
+Título del Producto:
+SKU / Código:
+Categoría:
+Badge / Etiqueta:
+Precio Base ($):
+Precio de Oferta ($ - Opcional):
+Descripción Completa del Producto:
+1. Imagen o Video de Portada Principal (Obligatorio):
+📷
+Arrastra aquí la foto/video de portada o haz clic Se optimiza automáticamente a WebP (1600px, 80-85% calidad) con miniatura ultraligera
+2. Galería Secundaria Multimedia (Fotos y Videos Adicionales): 0 archivos
+📁
+Arrastra fotos o videos para la galería secundaria (o haz clic) Soporta subida simultánea de múltiples imágenes y videos con compresión automática
+
+🔗 ¿Deseas ingresar URLs externas de imágenes o videos?
+URL Externa de Portada:
+URLs de Galería Secundaria (separadas por coma o salto de línea):
+Aplicar URLs Externas al Editor
+Especificaciones y Atributos Técnicos: + Añadir Atributo
+
+Palabras Clave / Tags (separadas por coma):
+Cancelar Guardar Producto en Catálogo
+
+Vista Previa de Importación de Catálogo
+✕
+Analizando archivo...
+Modo de inserción:
+Añadir al catálogo existente (actualiza SKU repetidos) Reemplazar catálogo completo
+#
+Nombre
+SKU
+Categoría
+Precio
+Badge
+Especificaciones
+
+Cancelar Confirmar e Importar al Catálogo 🚀
+

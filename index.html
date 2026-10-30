@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Nexo Store — Catálogo E-Commerce & Marca Blanca</title>
+
+  <!-- Metas PWA & SEO -->
+  <meta name="description" content="Catálogo interactivo de productos, e-commerce ágil y de marca blanca con soporte para importación Excel y personalización completa.">
+  <meta name="theme-color" content="#090d14">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="NexoApp">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='24' fill='%232563eb'/%3E%3Cpath d='M30 70V30l40 40V30' stroke='white' stroke-width='10' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E">
+
+  <!-- Fuentes Tipográficas Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Hoja de Estilos -->
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- SheetJS para Parser de Excel (.xlsx / .xls) del lado del cliente -->
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+</head>
+<body>
+
+  <!-- ========================================================
+       1. CABECERA PRINCIPAL NATIVA (Sin Mockups de Teléfono)
+       ======================================================== -->
+  <header class="app-top-header">
+    <div class="header-inner-container">
+      
+      <!-- Marca Blanca del Establecimiento / Tienda -->
+      <div class="header-brand-block">
+        <div class="brand-avatar-box">
+          <img class="brand-display-logo" src="" alt="Logo" style="display:none;" />
+          <div class="brand-logo-fallback">N</div>
+        </div>
+        <div class="brand-texts">
+          <h1 class="brand-display-name">Nexo Store</h1>
+          <p class="brand-display-tagline">Tecnología, Diseño & Estilo de Vida</p>
+        </div>
+      </div>
+
+      <!-- Barra de Búsqueda Dinámica Simplificada ("Buscar") -->
+      <div class="header-search-wrapper">
+        <svg class="search-icon" viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" fill="none" stroke-width="2">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input type="text" id="catalog-search-input" placeholder="Buscar" autocomplete="off" aria-label="Buscar productos">
+        <button class="btn-clear-search" id="btn-clear-search" title="Limpiar búsqueda">✕</button>
+      </div>
+
+      <!-- Acciones de Cabecera (Theming & Acceso Admin) -->
+      <div class="header-actions-group">
+        <!-- Selector de Tema Dinámico -->
+        <div class="theme-pill-selector" role="radiogroup" aria-label="Selector de Tema">
+          <button class="theme-toggle-btn active" data-theme="dark" title="Modo Oscuro">🌙</button>
+          <button class="theme-toggle-btn" data-theme="light" title="Modo Claro">☀️</button>
+          <button class="theme-toggle-btn" data-theme="auto" title="Automático según Sistema">🌓</button>
+        </div>
+
+        <!-- Botón de Acceso Admin con Barrera de Autenticación -->
+        <button class="btn-admin-pill" id="btn-admin-open" title="Panel de Administración del Propietario">
+          <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none" stroke-width="2">
+            <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path>
+            <circle cx="12" cy="12" r="3"></circle>
+          </svg>
+          <span>Admin</span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ========================================================
+       2. CONTENEDOR PRINCIPAL Y NAVEGACIÓN DE CATÁLOGO
+       ======================================================== -->
+  <main class="app-main-layout">
+
+    <!-- Barra Deslizable de Categorías Dinámicas -->
+    <nav class="category-nav-bar" aria-label="Navegación de Categorías">
+      <div class="category-nav-inner" id="category-scroll-bar">
+        <!-- Renderizado dinámicamente por catalog.js -->
+      </div>
+    </nav>
+
+    <!-- Barra de Controles Secundarios: Filtros Rápidos, Ordenamiento y Modo de Vista -->
+    <div class="catalog-subcontrols-bar">
+      <!-- Filtros Rápidos de Badges -->
+      <div class="filter-pills-row">
+        <button class="filter-pill-btn active" data-filter="all">Todos</button>
+        <button class="filter-pill-btn" data-filter="offers">🏷️ Ofertas</button>
+        <button class="filter-pill-btn" data-filter="bestsellers">🔥 Más Vendidos</button>
+        <button class="filter-pill-btn" data-filter="new">✨ Novedades</button>
+      </div>
+
+      <div class="subcontrols-right-row">
+        <!-- Contador de Productos -->
+        <span class="results-count-text" id="results-count-text">Cargando catálogo...</span>
+
+        <!-- Selector de Ordenamiento -->
+        <div class="sort-selector-wrap">
+          <label for="catalog-sort-select">Ordenar:</label>
+          <select id="catalog-sort-select" class="sort-select">
+            <option value="default">Recomendados</option>
+            <option value="price-asc">Menor Precio</option>
+            <option value="price-desc">Mayor Precio</option>
+            <option value="name-asc">Nombre (A - Z)</option>
+          </select>
+        </div>
+
+        <!-- Alternador de Vista: Cuadrícula (Grid) vs Feed / Reels Inmersivo -->
+        <div class="view-mode-pill" role="radiogroup" aria-label="Modo de Visualización">
+          <button class="btn-view-toggle active" id="btn-view-grid" title="Vista Cuadrícula">
+            <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none" stroke-width="2">
+              <rect x="3" y="3" width="7" height="7"></rect>
+              <rect x="14" y="3" width="7" height="7"></rect>
+              <rect x="14" y="14" width="7" height="7"></rect>
+              <rect x="3" y="14" width="7" height="7"></rect>
+            </svg>
+            <span class="btn-text-label">Cuadrícula</span>
+          </button>
+          <button class="btn-view-toggle" id="btn-view-reels" title="Vista Reels / Feed Inmersivo">
+            <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none" stroke-width="2">
+              <polygon points="5 3 19 12 5 21 5 3"></polygon>
+            </svg>
+            <span class="btn-text-label">Reels</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Viewport Maestro del Catálogo (Grid o Reels) -->
+    <section class="catalog-viewport view-mode-grid" id="catalog-viewport">
+      <!-- Poblado dinámicamente por catalog.js -->
+    </section>
+
+  </main>
+
+  <!-- ========================================================
+       3. MODAL DE DETALLE DE PRODUCTO CON GALERÍA ADAPTATIVA
+       ======================================================== -->
+  <div class="modal-container hidden" id="modal-product-detail" role="dialog" aria-modal="true">
+    <div class="modal-backdrop"></div>
+    <div class="modal-panel-detail">
+      <button class="modal-close-round" onclick="window.app.closeModal('modal-product-detail')" title="Cerrar detalle">✕</button>
+      <div id="product-detail-modal-body">
+        <!-- Renderizado dinámicamente por catalog.js con galería adaptativa y especificaciones -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================
+       3B. VISOR MODAL LIGHTBOX FULLSCREEN (FOTOS, VIDEOS, ZOOM & SWIPE)
+       ======================================================== -->
+  <div class="modal-container hidden lightbox-fullscreen-container" id="modal-lightbox" role="dialog" aria-modal="true">
+    <div class="lightbox-backdrop" id="lightbox-backdrop"></div>
+    <div class="lightbox-panel-fullscreen">
+      
+      <!-- Barra Superior de Controles del Lightbox -->
+      <div class="lightbox-header-bar">
+        <div class="lightbox-header-info">
+          <span class="lightbox-title-text" id="lightbox-title-text">Visor Multimedia</span>
+          <span class="lightbox-counter-text" id="lightbox-counter-text">1 de 1</span>
+        </div>
+        <div class="lightbox-header-actions">
+          <button class="lightbox-action-btn" id="btn-lightbox-zoom" title="Alternar Zoom (Doble Clic)">🔍 Zoom</button>
+          <button class="lightbox-action-btn btn-close-lightbox" id="btn-lightbox-close" title="Cerrar Visor (Escape)">✕</button>
+        </div>
+      </div>
+
+      <!-- Escenario Central Multimedia (Soporta swipe táctil y zoom) -->
+      <div class="lightbox-stage" id="lightbox-stage">
+        <!-- Renderizado dinámicamente con imagen o video HTML5 -->
+      </div>
+
+      <!-- Botones de Navegación Lateral (Escritorio / Tablet) -->
+      <button class="lightbox-nav-btn btn-prev" id="btn-lightbox-prev" aria-label="Anterior elemento">‹</button>
+      <button class="lightbox-nav-btn btn-next" id="btn-lightbox-next" aria-label="Siguiente elemento">›</button>
+
+      <div class="lightbox-gesture-hint">
+        <span>Desliza lateralmente para navegar o doble toque para zoom</span>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ========================================================
+       4. BARRERA DE AUTENTICACIÓN ADMIN (LOGIN BARRIER)
+       ======================================================== -->
+  <div class="modal-container hidden" id="modal-admin-login" role="dialog" aria-modal="true">
+    <div class="modal-backdrop"></div>
+    <div class="modal-panel-auth">
+      <div class="auth-box-header">
+        <div class="auth-shield-icon">🔐</div>
+        <h3>Acceso al Panel de Administración</h3>
+        <p>Ingresa tus credenciales de propietario para gestionar productos y marca blanca.</p>
+      </div>
+
+      <form id="form-admin-login" class="auth-form">
+        <div class="form-group">
+          <label for="admin-login-user">Usuario Administrador:</label>
+          <input type="text" id="admin-login-user" class="form-input" placeholder="admin" required autocomplete="username">
+        </div>
+
+        <div class="form-group">
+          <label for="admin-login-pass">Contraseña:</label>
+          <input type="password" id="admin-login-pass" class="form-input" placeholder="••••••••" required autocomplete="current-password">
+        </div>
+
+        <div class="auth-actions-row">
+          <button type="button" class="btn-ghost" id="btn-close-login-modal">Cancelar</button>
+          <button type="submit" class="btn-primary">Iniciar Sesión 🛡️</button>
+        </div>
+        <small class="auth-hint">Credencial inicial predeterminada: <code>admin</code> / <code>admin123</code></small>
+      </form>
+    </div>
+  </div>
+
+  <!-- ========================================================
+       5. PANEL DE ADMINISTRACIÓN B2B (DASHBOARD COMPLETO)
+       ======================================================== -->
+  <div class="modal-container hidden" id="modal-admin" role="dialog" aria-modal="true">
+    <div class="modal-backdrop"></div>
+    <div class="modal-panel-admin-dashboard">
+      
+      <!-- Cabecera del Dashboard -->
+      <div class="admin-dash-header">
+        <div class="admin-dash-title-group">
+          <span class="dash-icon-badge">⚙️</span>
+          <div>
+            <h3>Panel de Administración B2B</h3>
+            <small>Gestión Integral de Catálogo, Marca Blanca & Excel</small>
+          </div>
+        </div>
+
+        <div class="admin-dash-header-actions">
+          <button class="btn-logout-pill" id="btn-admin-logout" title="Cerrar sesión">Cerrar Sesión</button>
+          <button class="modal-close" id="btn-admin-close" title="Cerrar panel">✕</button>
+        </div>
+      </div>
+
+      <!-- Barra de Pestañas de Gestión -->
+      <nav class="admin-tabs-nav" aria-label="Pestañas de Administración">
+        <button class="admin-tab-btn active" data-tab="products">📦 Productos (CRUD)</button>
+        <button class="admin-tab-btn" data-tab="categories">🏷️ Categorías</button>
+        <button class="admin-tab-btn" data-tab="import">📊 Importación Masiva (Excel)</button>
+        <button class="admin-tab-btn" data-tab="branding">🎨 Marca & Estilos</button>
+        <button class="admin-tab-btn" data-tab="security">🔐 Seguridad & Respaldo</button>
+        <button class="admin-tab-btn" data-tab="github">☁️ Sincronización GitHub & Netlify</button>
+      </nav>
+
+      <!-- Contenido de las Pestañas -->
+      <div class="admin-dash-content-body">
+
+        <!-- Pestaña 1: Productos (CRUD Completo, Búsqueda, Filtro y Edición Masiva) -->
+        <section class="admin-tab-panel active" id="admin-panel-products">
+          <div class="admin-products-toolbar">
+            <!-- Barra de búsqueda contextual y selector de categorías -->
+            <div class="admin-filters-group">
+              <div class="admin-search-box">
+                <svg class="admin-search-icon" viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none" stroke-width="2">
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                <input type="text" id="admin-search-input" class="admin-search-input" placeholder="Buscar por nombre, SKU o etiqueta..." autocomplete="off">
+                <button type="button" class="btn-admin-clear-search hidden" id="btn-admin-clear-search" title="Limpiar búsqueda">✕</button>
+              </div>
+
+              <div class="admin-cat-select-wrap">
+                <select id="admin-filter-category" class="admin-select-filter" aria-label="Filtrar por categoría">
+                  <option value="all">🏷️ Todas las categorías</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Acciones masivas y botón nuevo producto -->
+            <div class="admin-toolbar-actions">
+              <button type="button" class="btn-bulk-delete hidden" id="btn-admin-bulk-delete" title="Eliminar productos seleccionados">
+                <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none" stroke-width="2">
+                  <polyline points="3 6 5 6 21 6"></polyline>
+                  <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                  <line x1="10" y1="11" x2="10" y2="17"></line>
+                  <line x1="14" y1="11" x2="14" y2="17"></line>
+                </svg>
+                <span>Eliminar seleccionados (<strong id="bulk-selected-count">0</strong>)</span>
+              </button>
+
+              <button type="button" class="btn-primary" id="btn-admin-new-product">+ Añadir Nuevo Producto</button>
+            </div>
+          </div>
+
+          <div class="table-responsive-wrapper">
+            <table class="admin-data-table">
+              <thead>
+                <tr>
+                  <th class="col-checkbox">
+                    <label class="admin-checkbox-label" title="Seleccionar todos">
+                      <input type="checkbox" id="admin-select-all-checkbox" class="admin-checkbox-input">
+                      <span class="admin-checkbox-custom"></span>
+                    </label>
+                  </th>
+                  <th>Foto</th>
+                  <th>Producto & SKU</th>
+                  <th>Precio</th>
+                  <th>Badge</th>
+                  <th>Popularidad</th>
+                  <th>Especificaciones</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody id="admin-products-tbody">
+                <!-- Poblado dinámicamente por admin.js -->
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        
+
+        <!-- Pestaña 2: Gestor Dinámico de Categorías -->
+        <section class="admin-tab-panel" id="admin-panel-categories">
+          <div class="categories-manager-grid">
+            <!-- Formulario Nueva Categoría -->
+            <div class="card-box-admin">
+              <h4>Crear Nueva Categoría</h4>
+              <form id="form-add-category" class="add-cat-form">
+                <div class="form-group">
+                  <label for="new-cat-name">Nombre de la Categoría:</label>
+                  <input type="text" id="new-cat-name" class="form-input" placeholder="ej: Calzado Deportivo" required>
+                </div>
+                <div class="form-group">
+                  <label for="new-cat-icon">Icono / Emoji:</label>
+                  <input type="text" id="new-cat-icon" class="form-input" placeholder="👟" maxlength="4">
+                </div>
+                <button type="submit" class="btn-primary w-full">+ Agregar Categoría</button>
+              </form>
+            </div>
+
+            <!-- Lista de Categorías Existentes con Reordenamiento -->
+            <div class="card-box-admin">
+              <h4>Categorías Activas en Navegación</h4>
+              <p class="section-help-text">Puedes reordenar, renombrar o eliminar categorías. Los productos se adaptan automáticamente.</p>
+              <div class="categories-list-rows" id="admin-categories-list">
+                <!-- Poblado por admin.js -->
+              </div>
+            </div>
+          </div>
+        </section>
+
+        
+
+        <!-- Pestaña 3: Importador Masivo Excel (.xlsx / .csv) -->
+        <section class="admin-tab-panel" id="admin-panel-import">
+          <div class="excel-importer-box">
+            <div class="importer-hero-card">
+              <div class="importer-icon">📑</div>
+              <h4>Importador Masivo de Catálogo</h4>
+              <p>Sube tu catálogo de productos directamente desde archivos <strong>Excel (.xlsx, .xls)</strong> o <strong>CSV (.csv)</strong>. Nuestro motor mapea automáticamente todos los atributos del producto, separando <strong>URL Foto de Portada</strong> y <strong>URLs Fotos de Muestra</strong>, y protege íntegramente tu catálogo existente.</p>
+
+              <div class="importer-actions-row">
+                <button class="btn-primary-ghost" id="btn-download-import-template">📥 Descargar Plantilla Modelo (Excel / CSV)</button>
+                <label class="btn-file-upload">
+                  <span>📂 Seleccionar Archivo Excel o CSV</span>
+                  <input type="file" id="input-import-spreadsheet" accept=".xlsx,.xls,.csv" hidden>
+                </label>
+              </div>
+            </div>
+
+            <div class="importer-guide-card">
+              <h5>Columnas Soportadas para Mapeo Inteligente (Con Retrocompatibilidad):</h5>
+              <div class="columns-badges-flex">
+                <span class="col-pill">Titulo Producto</span>
+                <span class="col-pill">SKU</span>
+                <span class="col-pill">Categoria</span>
+                <span class="col-pill">Precio Base</span>
+                <span class="col-pill">Precio Oferta</span>
+                <span class="col-pill">Badge</span>
+                <span class="col-pill">Descripcion</span>
+                <span class="col-pill">URL Foto de Portada</span>
+                <span class="col-pill">URLs Fotos de Muestra (separadas por comas)</span>
+                <span class="col-pill">Especificaciones (Clave:Valor; Clave:Valor)</span>
+                <span class="col-pill">Tags (separados por coma)</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        
+
+        <!-- Pestaña 4: Personalización de Marca Blanca & Theme Engine -->
+        <section class="admin-tab-panel" id="admin-panel-branding">
+          <form id="form-admin-branding" class="branding-admin-form">
+            <div class="branding-grid-2col">
+              
+              <!-- Identidad y Subida Directa de Imágenes -->
+              <div class="card-box-admin">
+                <h4>Identidad Comercial</h4>
+                
+                <div class="form-group">
+                  <label for="brand-input-name">Nombre Comercial / Tienda:</label>
+                  <input type="text" id="brand-input-name" class="form-input" required>
+                </div>
+
+                <div class="form-group">
+                  <label for="brand-input-tagline">Eslogan o Subtítulo:</label>
+                  <input type="text" id="brand-input-tagline" class="form-input">
+                </div>
+
+                <div class="form-group">
+                  <label for="brand-input-whatsapp">WhatsApp de Contacto / Ventas:</label>
+                  <input type="text" id="brand-input-whatsapp" class="form-input" placeholder="+1234567890">
+                </div>
+
+                <!-- Subida directa de Logo (Base64 o URL) -->
+                <div class="form-group">
+                  <label>Logo de la Marca (Subida Directa o URL):</label>
+                  <div class="file-uploader-box">
+                    <div class="uploader-preview-row" style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
+                      <img id="preview-brand-logo" class="uploader-preview-img" style="display:none;" alt="Preview Logo">
+                      <button type="button" id="btn-remove-brand-logo" class="btn-sm-action btn-del" style="display:none;">🗑️ Quitar Logo</button>
+                    </div>
+                    <input type="file" id="upload-brand-logo" accept="image/*" class="form-input-file">
+                    <input type="url" id="brand-input-logo-url" class="form-input" placeholder="O pega una URL directa del logo (https://...)" style="margin-top:6px;">
+                    <small>Sube un archivo PNG, SVG, WebP o JPG (se optimiza y aplica al instante) o ingresa una URL.</small>
+                  </div>
+                </div>
+
+                <!-- Subida directa de Favicon -->
+                <div class="form-group">
+                  <label>Favicon de Pestaña:</label>
+                  <div class="file-uploader-box">
+                    <div class="uploader-preview-row" style="display:flex; align-items:center; gap:12px;">
+                      <img id="preview-brand-favicon" class="uploader-preview-fav" style="display:none;" alt="Preview Favicon">
+                      <button type="button" id="btn-remove-brand-favicon" class="btn-sm-action btn-del" style="display:none;">🗑️ Quitar Favicon</button>
+                    </div>
+                    <input type="file" id="upload-brand-favicon" accept="image/*" class="form-input-file">
+                  </div>
+                </div>
+              </div>
+
+              <!-- Tipografía y Paleta de Colores con Badge Sync -->
+              <div class="card-box-admin">
+                <h4>Tipografía y Paleta de Colores</h4>
+
+                <div class="form-group">
+                  <label for="brand-font-primary">Fuente Tipográfica Principal:</label>
+                  <select id="brand-font-primary" class="form-input">
+                    <option value="'Plus Jakarta Sans', sans-serif">Plus Jakarta Sans (Moderna y Elegante)</option>
+                    <option value="'Inter', sans-serif">Inter (Limpia y Funcional)</option>
+                    <option value="'Poppins', sans-serif">Poppins (Geométrica)</option>
+                    <option value="'Outfit', sans-serif">Outfit (Vanguardista)</option>
+                    <option value="'Montserrat', sans-serif">Montserrat (Contemporánea)</option>
+                    <option value="'Playfair Display', serif">Playfair Display (Editorial / Lujo)</option>
+                    <option value="'Roboto', sans-serif">Roboto (Clásica y Neutra)</option>
+                  </select>
+                </div>
+
+                <!-- Requisito 5: Restricción del color modificable exclusivamente a la tipografía de tags y categorías seleccionadas -->
+                <div class="form-group">
+                  <label for="color-tags-categories">Color de Tipografía para Etiquetas (Tags) y Categorías Seleccionadas:</label>
+                  <div class="color-picker-item">
+                    <input type="color" id="color-tags-categories" value="#2563eb">
+                    <span>Color de tipografía exclusivo</span>
+                  </div>
+                  <small class="field-help-text">Estilo estricto: Este color se aplica únicamente al texto de las etiquetas (tags) y categorías seleccionadas. Los botones, fondos de tarjeta y textos generales permanecen neutros e intactos.</small>
+                </div>
+              </div>
+
+            </div>
+
+            <button type="submit" class="btn-primary w-full" style="margin-top: 20px;">Guardar Identidad y Estilos ✨</button>
+          </form>
+        </section>
+
+        <!-- Pestaña 5: Seguridad y Respaldo -->
+        <section class="admin-tab-panel" id="admin-panel-security">
+          <div class="security-grid-2col">
+            
+            <!-- Cambio de Credenciales de Acceso -->
+            <div class="card-box-admin">
+              <h4>Credenciales de Administrador</h4>
+              <form id="form-admin-security" class="security-form">
+                <div class="form-group">
+                  <label for="admin-change-user">Usuario de Acceso:</label>
+                  <input type="text" id="admin-change-user" class="form-input" required>
+                </div>
+                <div class="form-group">
+                  <label for="admin-change-pass">Nueva Contraseña (dejar vacío si no deseas cambiarla):</label>
+                  <input type="password" id="admin-change-pass" class="form-input" placeholder="••••••••">
+                </div>
+                <div class="form-group">
+                  <label for="admin-change-pass-confirm">Confirmar Nueva Contraseña:</label>
+                  <input type="password" id="admin-change-pass-confirm" class="form-input" placeholder="••••••••">
+                </div>
+                <button type="submit" class="btn-primary w-full">Guardar Nuevas Credenciales 🔐</button>
+              </form>
+            </div>
+
+            <!-- Respaldo JSON y Reset -->
+            <div class="card-box-admin">
+              <h4>Copias de Seguridad & Catálogo Demo</h4>
+              <div class="backup-buttons-stack">
+                <button class="btn-primary w-full" id="btn-export-full-json">💾 Exportar Catálogo Completo (JSON)</button>
+                
+                <label class="btn-primary-ghost w-full" style="display:flex; justify-content:center; cursor:pointer;">
+                  <span>📥 Importar Copia de Seguridad JSON</span>
+                  <input type="file" id="input-import-full-json" accept=".json" hidden>
+                </label>
+
+                <hr class="divider-subtle">
+
+                <button class="btn-danger-ghost w-full" id="btn-reset-sample-catalog">🔄 Restaurar Catálogo Demo (Productos de Ejemplo)</button>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- Pestaña 6: Sincronización Automática GitHub & Netlify -->
+        <section class="admin-tab-panel" id="admin-panel-github">
+          <div class="github-sync-grid">
+            
+            <!-- Columna Izquierda: Formulario de Configuración y Token -->
+            <div class="card-box-admin">
+              <div class="card-title-with-pill">
+                <h4>Conexión con GitHub API</h4>
+                <span class="status-pill-badge" id="github-status-badge">🟡 No configurado</span>
+              </div>
+              <p class="section-help-text">Al configurar tu Token de GitHub, cada cambio que hagas en este panel (guardar, editar o eliminar productos) creará un commit automático. Netlify detectará el commit y actualizará tu web en vivo en ~1 minuto.</p>
+
+              <form id="form-admin-github" class="github-form">
+                <div class="form-row-2">
+                  <div class="form-group">
+                    <label for="github-input-owner">Usuario u Organización de GitHub:</label>
+                    <input type="text" id="github-input-owner" class="form-input" placeholder="ej: guilleadyc" value="guilleadyc" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="github-input-repo">Nombre del Repositorio:</label>
+                    <input type="text" id="github-input-repo" class="form-input" placeholder="ej: NexoApp" value="NexoApp" required>
+                  </div>
+                </div>
+
+                <div class="form-row-2">
+                  <div class="form-group">
+                    <label for="github-input-branch">Rama (Branch):</label>
+                    <input type="text" id="github-input-branch" class="form-input" placeholder="main" value="main" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="github-input-path">Ruta del Archivo de Catálogo:</label>
+                    <input type="text" id="github-input-path" class="form-input" placeholder="data/catalog.json" value="data/catalog.json" required>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="github-input-token">Token de Acceso Personal de GitHub (PAT):</label>
+                  <div class="password-input-wrapper">
+                    <input type="password" id="github-input-token" class="form-input" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx o github_pat_..." autocomplete="off">
+                    <button type="button" class="btn-toggle-token-visibility" id="btn-toggle-github-token" title="Mostrar/Ocultar Token">👁️</button>
+                  </div>
+                  <small class="field-help-text">El token se guarda de forma segura en tu navegador y solo se utiliza para enviar los datos a tu repositorio.</small>
+                </div>
+
+                <div class="github-toggles-block">
+                  <label class="checkbox-label-block">
+                    <input type="checkbox" id="github-check-enabled" checked>
+                    <span><strong>Activar Sincronización Automática con GitHub</strong></span>
+                  </label>
+                  <label class="checkbox-label-block">
+                    <input type="checkbox" id="github-check-autocommit" checked>
+                    <span>Hacer commit automático cada vez que guarde, edite o elimine productos o categorías</span>
+                  </label>
+                </div>
+
+                <div class="github-actions-row">
+                  <button type="button" class="btn-primary-ghost" id="btn-github-test">🔌 Probar Conexión</button>
+                  <button type="submit" class="btn-primary">💾 Guardar Configuración</button>
+                </div>
+              </form>
+
+              <hr class="divider-subtle" style="margin: 20px 0;">
+
+              <div class="manual-sync-block">
+                <h5>Sincronización Manual Inmediata</h5>
+                <p class="section-help-text">Si deseas subir todo el catálogo actual inmediatamente a GitHub sin esperar a editar nada:</p>
+                <button type="button" class="btn-primary w-full" id="btn-github-sync-now">🚀 Sincronizar Catálogo Completo Ahora con GitHub</button>
+              </div>
+            </div>
+
+            <!-- Columna Derecha: Estado en Vivo & Guía Paso a Paso sin tecnicismos -->
+            <div class="card-box-admin">
+              <h4>Estado del Repositorio & Despliegue en Vivo</h4>
+              
+              <div class="github-status-card" id="github-status-card">
+                <div class="status-indicator-row">
+                  <div class="status-circle" id="github-status-dot"></div>
+                  <div>
+                    <strong id="github-status-title">Estado de Sincronización</strong>
+                    <div id="github-status-detail" class="status-detail-text">Ingresa tu token de GitHub a la izquierda para activar los commits automáticos.</div>
+                  </div>
+                </div>
+
+                <div class="status-meta-box">
+                  <div class="status-meta-item">
+                    <span>Repositorio:</span>
+                    <strong id="github-meta-repo"><a href="https://github.com/guilleadyc/NexoApp" target="_blank" rel="noopener">guilleadyc/NexoApp ↗</a></strong>
+                  </div>
+                  <div class="status-meta-item">
+                    <span>Rama de despliegue:</span>
+                    <strong id="github-meta-branch">main</strong>
+                  </div>
+                  <div class="status-meta-item">
+                    <span>Archivo de datos:</span>
+                    <strong id="github-meta-file">data/catalog.json</strong>
+                  </div>
+                  <div class="status-meta-item">
+                    <span>Último commit:</span>
+                    <strong id="github-meta-commit">Sin commits recientes</strong>
+                  </div>
+                </div>
+
+                <div class="netlify-notice-box">
+                  <span class="netlify-icon">⚡</span>
+                  <div>
+                    <strong>Flujo Automático con Netlify:</strong>
+                    <p>Cada vez que guardas en el panel, se envía un commit a GitHub y Netlify reconstruye la página en vivo en unos 40 segundos.</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Guía Rápida Paso a Paso para generar el Token -->
+              <div class="github-guide-card">
+                <h5>🔑 ¿Cómo generar tu clave/token en GitHub en 3 pasos?</h5>
+                <ol class="steps-clean-list">
+                  <li>Inicia sesión en <strong>GitHub.com</strong>, haz clic en tu foto de perfil (arriba a la derecha) y entra a <strong>Settings</strong> (Configuración).</li>
+                  <li>En el menú de la izquierda, baja hasta el final y haz clic en <strong>Developer Settings</strong> ➡️ <strong>Personal access tokens</strong> ➡️ <strong>Tokens (classic)</strong>.</li>
+                  <li>Haz clic en <strong>Generate new token (classic)</strong>, escribe una nota (ej: <code>NexoApp</code>), marca la casilla <strong>repo</strong> (o <code>Contents: Read and write</code>) y pulsa <strong>Generate token</strong>.</li>
+                  <li>Copia el código que empieza por <code>ghp_...</code>, pégalo en el campo de la izquierda y haz clic en <strong>Guardar Configuración</strong>. ¡Listo!</li>
+                </ol>
+              </div>
+
+            </div>
+
+          </div>
+        </section>
+
+        
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================
+       6. MODAL EDITOR DE PRODUCTO (NUEVO / EDITAR)
+       ======================================================== -->
+  <div class="modal-container hidden" id="modal-product-editor" role="dialog" aria-modal="true">
+    <div class="modal-backdrop"></div>
+    <div class="modal-panel-editor">
+      <div class="editor-header">
+        <h3 id="product-editor-title">Editar Producto</h3>
+        <button class="modal-close" id="btn-close-product-editor">✕</button>
+      </div>
+
+      <form id="form-product-editor" class="editor-form-scroll">
+        <div class="form-group">
+          <label for="prod-field-name">Título del Producto:</label>
+          <input type="text" id="prod-field-name" class="form-input" required placeholder="ej: Auriculares Pro ANC">
+        </div>
+
+        <div class="form-row-3">
+          <div class="form-group">
+            <label for="prod-field-sku">SKU / Código:</label>
+            <input type="text" id="prod-field-sku" class="form-input" placeholder="NX-001">
+          </div>
+          <div class="form-group">
+            <label for="prod-field-cat">Categoría:</label>
+            <select id="prod-field-cat" class="form-input" required></select>
+          </div>
+          <div class="form-group">
+            <label for="prod-field-badge">Badge / Etiqueta:</label>
+            <input type="text" id="prod-field-badge" class="form-input" placeholder="Más Vendido, Oferta, etc.">
+          </div>
+        </div>
+
+        <div class="form-row-2">
+          <div class="form-group">
+            <label for="prod-field-baseprice">Precio Base ($):</label>
+            <input type="number" id="prod-field-baseprice" class="form-input" step="0.01" min="0" required placeholder="199.99">
+          </div>
+          <div class="form-group">
+            <label for="prod-field-saleprice">Precio de Oferta ($ - Opcional):</label>
+            <input type="number" id="prod-field-saleprice" class="form-input" step="0.01" min="0" placeholder="149.99">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="prod-field-desc">Descripción Completa del Producto:</label>
+          <textarea id="prod-field-desc" class="form-input" rows="3" placeholder="Detalles de diseño, características y materiales..."></textarea>
+        </div>
+
+        <!-- ========================================================
+             SECCIÓN MULTIMEDIA: PORTADA PRINCIPAL Y GALERÍA SECUNDARIA
+             Soporta Carga Directa, Drag & Drop y Compresión WebP
+             ======================================================== -->
+        <div class="editor-media-management-section">
+          
+          <!-- 1. Carga de Imagen / Video de Portada Principal -->
+          <div class="form-group">
+            <label><strong>1. Imagen o Video de Portada Principal (Obligatorio):</strong></label>
+            <div class="drop-zone-box" id="cover-drop-zone" title="Arrastra tu portada o haz clic para seleccionarla">
+              <input type="file" id="input-cover-file" accept="image/*,video/*" hidden>
+              
+              <div class="drop-prompt-content" id="cover-drop-prompt">
+                <div class="drop-zone-icon">📷</div>
+                <div class="drop-prompt-texts">
+                  <strong>Arrastra aquí la foto/video de portada o haz clic</strong>
+                  <span>Se optimiza automáticamente a WebP (1600px, 80-85% calidad) con miniatura ultraligera</span>
+                </div>
+              </div>
+
+              <!-- Tarjeta de Previsualización y Gestión de Portada -->
+              <div class="cover-preview-card" id="cover-preview-card" style="display:none;">
+                <div class="cover-preview-media"></div>
+                <div class="cover-preview-info"></div>
+                <div class="cover-preview-actions">
+                  <button type="button" class="btn-sm-action" onclick="document.getElementById('input-cover-file').click()" title="Reemplazar portada">🔄 Reemplazar</button>
+                  <button type="button" class="btn-sm-action btn-del" onclick="window.app.adminManager.removeCoverFile()" title="Eliminar portada">🗑️ Eliminar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2. Carga de Galería Secundaria Multimedia (Múltiples Fotos y Videos) -->
+          <div class="form-group" style="margin-top: 16px;">
+            <div class="gallery-section-header">
+              <label><strong>2. Galería Secundaria Multimedia (Fotos y Videos Adicionales):</strong></label>
+              <span class="gallery-count-badge" id="gallery-count-badge">0 archivos</span>
+            </div>
+            
+            <div class="drop-zone-box" id="gallery-drop-zone" title="Arrastra múltiples fotos o videos aquí">
+              <input type="file" id="input-gallery-files" accept="image/*,video/*" multiple hidden>
+              
+              <div class="drop-prompt-content">
+                <div class="drop-zone-icon">📁</div>
+                <div class="drop-prompt-texts">
+                  <strong>Arrastra fotos o videos para la galería secundaria (o haz clic)</strong>
+                  <span>Soporta subida simultánea de múltiples imágenes y videos con compresión automática</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Grilla de Previsualización y Gestión de la Galería -->
+            <div class="gallery-items-grid" id="gallery-items-grid">
+              <!-- Renderizado dinámicamente por admin.js con miniaturas, tipo y botón eliminar -->
+            </div>
+          </div>
+
+          <!-- Opción alternativa: URLs Externas -->
+          <div class="manual-urls-toggle-row">
+            <button type="button" class="btn-toggle-manual-link" id="btn-toggle-manual-url">
+              🔗 ¿Deseas ingresar URLs externas de imágenes o videos?
+            </button>
+          </div>
+
+          <div class="manual-urls-box hidden" id="manual-url-input-box">
+            <div class="form-group">
+              <label for="manual-cover-url">URL Externa de Portada:</label>
+              <input type="url" id="manual-cover-url" class="form-input" placeholder="https://ejemplo.com/portada.webp">
+            </div>
+            <div class="form-group">
+              <label for="manual-gallery-urls">URLs de Galería Secundaria (separadas por coma o salto de línea):</label>
+              <textarea id="manual-gallery-urls" class="form-input" rows="2" placeholder="https://ejemplo.com/foto2.webp&#10;https://ejemplo.com/video.mp4"></textarea>
+            </div>
+            <button type="button" class="btn-primary-ghost" id="btn-apply-manual-urls">Aplicar URLs Externas al Editor</button>
+          </div>
+
+        </div>
+
+        <!-- Constructor Dinámico de Especificaciones Técnicas (Atributos Clave-Valor) -->
+        <div class="specs-builder-section">
+          <div class="specs-builder-header">
+            <label>Especificaciones y Atributos Técnicos:</label>
+            <button type="button" class="btn-add-spec" id="btn-add-spec-row">+ Añadir Atributo</button>
+          </div>
+          <div id="specs-builder-rows" class="specs-rows-container">
+            <!-- Filas dinámicas generadas por admin.js -->
+          </div>
+        </div>
+
+        <div class="form-group" style="margin-top: 14px;">
+          <label for="prod-field-tags">Palabras Clave / Tags (separadas por coma):</label>
+          <input type="text" id="prod-field-tags" class="form-input" placeholder="inalambrico, audio, bluetooth, viaje">
+        </div>
+
+        <div class="editor-footer-actions">
+          <button type="button" class="btn-ghost" onclick="window.app.adminManager.closeProductEditor()">Cancelar</button>
+          <button type="submit" class="btn-primary">Guardar Producto en Catálogo</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ========================================================
+       7. MODAL DE VISTA PREVIA DE IMPORTACIÓN EXCEL
+       ======================================================== -->
+  <div class="modal-container hidden" id="modal-import-preview" role="dialog" aria-modal="true">
+    <div class="modal-backdrop"></div>
+    <div class="modal-panel-preview">
+      <div class="preview-header">
+        <h3>Vista Previa de Importación de Catálogo</h3>
+        <button class="modal-close" id="btn-cancel-import">✕</button>
+      </div>
+
+      <div class="preview-body-scroll">
+        <div class="preview-summary-card">
+          <h4 id="import-preview-summary">Analizando archivo...</h4>
+          <div id="import-errors-box" class="import-errors-alert" style="display:none;"></div>
+
+          <div class="import-mode-selection">
+            <label>Modo de inserción seguro (Protección de Datos Activa):</label>
+            <div class="radio-options-row">
+              <label class="radio-label">
+                <input type="radio" name="import-mode" value="append" checked>
+                <span>Añadir únicamente nuevos productos (protege intactos todos los productos existentes del catálogo)</span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="table-responsive-wrapper">
+          <table class="preview-data-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Portada & Nombre</th>
+                <th>SKU</th>
+                <th>Categoría</th>
+                <th>Precio</th>
+                <th>Badge</th>
+                <th>Multimedia & Specs</th>
+              </tr>
+            </thead>
+            <tbody id="import-preview-tbody">
+              <!-- Filas de vista previa -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="preview-footer-actions">
+        <button class="btn-ghost" onclick="window.app.closeModal('modal-import-preview')">Cancelar</button>
+        <button class="btn-primary" id="btn-confirm-import">Confirmar e Importar al Catálogo 🚀</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contenedor Flotante de Notificaciones Toast -->
+  <aside class="toast-container" id="toast-container" aria-live="polite" aria-atomic="true"></aside>
+
+  <!-- Módulos de la Aplicación -->
+  <script src="optimizer.js"></script>
+  <script src="importer.js"></script>
+  <script src="catalog.js"></script>
+  <script src="github-sync.js"></script>
+  <script src="admin.js"></script>
+  <script src="app.js"></script>
+
+</body>
+</html>
